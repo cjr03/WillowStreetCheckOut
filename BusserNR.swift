@@ -1,8 +1,11 @@
 import SwiftUI
 
-struct COView: View {
+struct CONRView: View {
     @EnvironmentObject var appInfo: AppInformation
-    @State private var nextScreen = false
+    @State private var b17 = false
+    @State private var b18 = false
+    @State private var b19 = false
+    @State private var b20 = false
     var body: some View {
             ZStack {
                 Color(.red)
@@ -21,10 +24,10 @@ struct COView: View {
                             .foregroundColor(Color.white)
                         VStack(){
                             HStack {
-                                NavigationLink(destination: FinalView(), isActive: $nextScreen) {
+                                NavigationLink(destination: NRFinalView(), isActive: $b17) {
                                     Button {
                                         appInfo.busserTip = 0.17
-                                        nextScreen = true
+                                        b17 = true
                                     } label: {Text("17%")
                                         .bold()
                                         .font(.subheadline)
@@ -35,10 +38,10 @@ struct COView: View {
                                         .foregroundColor(.red)
                                         .cornerRadius(15))
                                     }}
-                                NavigationLink(destination: FinalView(), isActive: $nextScreen) {
+                                NavigationLink(destination: NRFinalView(), isActive: $b18) {
                                     Button {
                                         appInfo.busserTip = 0.18
-                                        nextScreen = true
+                                        b18 = true
                                     } label: {Text("18%")
                                         .bold()
                                         .font(.subheadline)
@@ -51,10 +54,10 @@ struct COView: View {
                                     }}
                             }.padding(.vertical, 20.0)
                             HStack {
-                                NavigationLink(destination: FinalView(), isActive: $nextScreen) {
+                                NavigationLink(destination: NRFinalView(), isActive: $b19) {
                                     Button {
                                         appInfo.busserTip = 0.19
-                                        nextScreen = true
+                                        b19 = true
                                     } label: {Text("19%")
                                         .bold()
                                         .font(.subheadline)
@@ -65,10 +68,10 @@ struct COView: View {
                                         .foregroundColor(.red)
                                         .cornerRadius(15))
                                     }}
-                                NavigationLink(destination: FinalView(), isActive: $nextScreen) {
+                                NavigationLink(destination: NRFinalView(), isActive: $b20) {
                                     Button {
                                         appInfo.busserTip = 0.20
-                                        nextScreen = true
+                                        b20 = true
                                     } label: {Text("20%")
                                         .bold()
                                         .font(.subheadline)
@@ -101,8 +104,8 @@ struct COView: View {
     }
 }
 
-struct COView_Previews: PreviewProvider {
+struct CONRView_Previews: PreviewProvider {
     static var previews: some View {
-        COView()
+        CONRView()
     }
 }
