@@ -1,9 +1,10 @@
 import SwiftUI
 
-struct NRView: View {
+struct YRView: View {
     @EnvironmentObject var appInfo: AppInformation
     @State private var isActive = false
     @State var netSalesText: String = ""
+    @State var foodText: String = ""
     @State var beerText: String = ""
     @State var wineText: String = ""
     @State var liqourText: String = ""
@@ -39,7 +40,21 @@ struct NRView: View {
                             .keyboardType(.decimalPad)
                             .background(Color.white.cornerRadius(10))
                             .foregroundColor(.black)
-                    }.padding(.all, 20)
+                    }.padding(.all, 10)
+                        .background(Rectangle()
+                            .foregroundColor(.red)
+                            .cornerRadius(15))
+                    HStack {
+                        Text("Food:          ")
+                            .bold()
+                            .foregroundColor(.white)
+                        Spacer()
+                        TextField("Enter", text: $foodText)
+                            .padding()
+                            .keyboardType(.decimalPad)
+                            .background(Color.white.cornerRadius(10))
+                            .foregroundColor(.black)
+                    }.padding(.all, 10)
                         .background(Rectangle()
                             .foregroundColor(.red)
                             .cornerRadius(15))
@@ -53,7 +68,7 @@ struct NRView: View {
                             .keyboardType(.decimalPad)
                             .background(Color.white.cornerRadius(10))
                             .foregroundColor(.black)
-                    }.padding(.all, 20)
+                    }.padding(.all, 10)
                         .background(Rectangle()
                             .foregroundColor(.red)
                             .cornerRadius(15))
@@ -67,7 +82,7 @@ struct NRView: View {
                             .keyboardType(.decimalPad)
                             .background(Color.white.cornerRadius(10))
                             .foregroundColor(.black)
-                    }.padding(.all, 20)
+                    }.padding(.all, 10)
                         .background(Rectangle()
                             .foregroundColor(.red)
                             .cornerRadius(15))
@@ -81,14 +96,15 @@ struct NRView: View {
                             .keyboardType(.decimalPad)
                             .background(Color.white.cornerRadius(10))
                             .foregroundColor(.black)
-                    }.padding(.all, 20)
+                    }.padding(.all, 10)
                         .background(Rectangle()
                             .foregroundColor(.red)
                             .cornerRadius(15))
-                    NavigationLink(destination: CONRView(), isActive: $isActive) {
+                    NavigationLink(destination: COView(), isActive: $isActive) {
                         Button {
                             appInfo.liqourSales = 0.0
                             appInfo.netSales = 0.0
+                            appInfo.foodSales = 0.0
                             if let liqourValue = Double(liqourText){
                                 appInfo.liqourSales += (liqourValue)
                             } else {
@@ -108,19 +124,24 @@ struct NRView: View {
                                 appInfo.liqourSales = 0.0
                             }
                             if let netValue = Double(netSalesText){
-                                appInfo.netSales += netValue
+                                appInfo.netSales = netValue
                             } else {
                                 isActive = false
                                 appInfo.netSales = 0.0
                             }
+                            if let foodValue = Double(foodText){
+                                appInfo.foodSales = (foodValue)
+                            } else {
+                                isActive = false
+                                appInfo.liqourSales = 0.0
+                            }
                             isActive = true
-                            if (netSalesText.count == 0 || beerText.count == 0 ||
-                                wineText.count == 0 ||
-                                liqourText.count == 0
-                            ) {
+                            if (netSalesText.count == 0 || beerText.count == 0 || wineText.count == 0 || foodText.count == 0 ||
+                                liqourText.count == 0 ) {
                                 isActive = false
                                 appInfo.liqourSales = 0.0
                                 appInfo.netSales = 0.0
+                                appInfo.foodSales = 0.0
                             }
                         } label: {
                             Text("Next")
@@ -128,7 +149,7 @@ struct NRView: View {
                                 .font(.title2)
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 105)
-                                .padding(.vertical, 20)
+                                .padding(.vertical, 15)
                                 .background(Rectangle()
                                     .foregroundColor(.red)
                                     .cornerRadius(15))
@@ -148,13 +169,13 @@ struct NRView: View {
                 .cornerRadius(15)
                 .shadow(radius: 15))
             .padding(.all, 25.0)
-            .offset(x: 0, y: -25)
+            .offset(x:0, y: -25)
         }
     }
 }
 
-struct NRView_Previews: PreviewProvider {
+struct YRView_Previews: PreviewProvider {
     static var previews: some View {
-        NRView()
+        YRView()
     }
 }
